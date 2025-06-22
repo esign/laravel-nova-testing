@@ -2,12 +2,12 @@
 
 namespace Esign\NovaTesting\Concerns;
 
-use Illuminate\Testing\TestResponse;
 use InvalidArgumentException;
 use Laravel\Nova\Resource as NovaResource;
 
 trait MakesNovaRequests
 {
+    use MakesNovaActionRequests;
     use MakesNovaResourceRequests;
     use MakesNovaPageRequests;
 

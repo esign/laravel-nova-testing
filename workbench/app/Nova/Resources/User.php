@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
+use Workbench\App\Nova\Actions\MyAction;
 use Workbench\App\Nova\Lenses\MyLens;
 
 class User extends Resource
@@ -50,6 +51,13 @@ class User extends Resource
     {
         return [
             MyLens::make(),
+        ];
+    }
+
+    public function actions(NovaRequest $request)
+    {
+        return [
+            MyAction::make(),
         ];
     }
 }

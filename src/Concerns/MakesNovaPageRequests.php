@@ -16,46 +16,46 @@ trait MakesNovaPageRequests
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey()));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}"));
     }
 
     public function getNovaResourceDetailPage(string $resourceClass, mixed $resourceId): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey() . '/' . $resourceId));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}/{$resourceId}"));
     }
 
     public function getNovaDashboardPage(string $dashboard): TestResponse
     {
-        return $this->get(Nova::url('/dashboards/' . $dashboard));
+        return $this->get(Nova::url("/dashboards/{$dashboard}"));
     }
 
     public function getNovaResourceCreatePage(string $resourceClass): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey() . '/new'));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}/new"));
     }
 
     public function getNovaResourceEditPage(string $resourceClass, mixed $resourceId): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey() . '/' . $resourceId . '/edit'));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}/{$resourceId}/edit"));
     }
 
     public function getNovaResourceReplicatePage(string $resourceClass, mixed $resourceId): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey() . '/' . $resourceId . '/replicate'));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}/{$resourceId}/replicate"));
     }
 
     public function getNovaResourceLensPage(string $resourceClass, string $lens): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->get(Nova::url('/resources/' . $resourceClass::uriKey() . '/lens/' . $lens));
+        return $this->get(Nova::url("/resources/{$resourceClass::uriKey()}/lens/{$lens}"));
     }
 }
