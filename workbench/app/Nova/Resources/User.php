@@ -1,12 +1,14 @@
 <?php
 
-namespace Workbench\App\Nova;
+namespace Workbench\App\Nova\Resources;
 
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
+use Workbench\App\Nova\Lenses\MyLens;
 
 class User extends Resource
 {
@@ -39,6 +41,15 @@ class User extends Resource
 
             Password::make('Password')
                 ->onlyOnForms(),
+
+            BelongsToMany::make('Roles', 'roles', Role::class),
+        ];
+    }
+
+    public function lenses(NovaRequest $request)
+    {
+        return [
+            MyLens::make(),
         ];
     }
 }
