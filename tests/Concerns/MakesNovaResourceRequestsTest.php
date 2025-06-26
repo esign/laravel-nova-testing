@@ -129,11 +129,12 @@ class MakesNovaResourceRequestsTest extends TestCase
     {
         // Arrange
         $user = User::factory()->create();
+        $role = Role::factory()->create(['deleted_at' => now()]);
 
         // Act
         $response = $this->actingAs($user)->restoreNovaResource(
-            resourceClass: UserResource::class,
-            resourceId: $user->getKey(),
+            resourceClass: RoleResource::class,
+            resourceIds: [$role->getKey()],
         );
 
         // Assert

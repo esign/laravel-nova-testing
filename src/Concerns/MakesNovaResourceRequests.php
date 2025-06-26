@@ -49,11 +49,11 @@ trait MakesNovaResourceRequests
         return $this->deleteJson("/nova-api/{$resourceClass::uriKey()}/force?" . Arr::query(['resources' => $resourceIds]));
     }
 
-    public function restoreNovaResource(string $resourceClass, mixed $resourceId): TestResponse
+    public function restoreNovaResource(string $resourceClass, array $resourceIds): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}/restore");
+        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/restore?" . Arr::query(['resources' => $resourceIds]));
     }
 
     public function attachNovaResource(
