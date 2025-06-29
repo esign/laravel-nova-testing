@@ -57,16 +57,6 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Esign\\NovaTesting\\NovaTestingServiceProvider"
-            ],
-            "aliases": {
-                "NovaTesting": "Esign\\NovaTesting\\Facades\\NovaTestingFacade"
-            }
-        }
-    },
     "repositories": {
         "nova": {
             "type": "composer",

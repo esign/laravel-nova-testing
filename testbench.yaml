@@ -1,10 +1,7 @@
-laravel: '@testbench'
-
 providers:
   - Laravel\Nova\NovaServiceProvider
   - Laravel\Nova\NovaCoreServiceProvider
   - Workbench\App\Providers\NovaServiceProvider
-  - Esign\NovaTesting\NovaTestingServiceProvider
   - Inertia\ServiceProvider
 
 migrations:
