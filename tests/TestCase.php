@@ -15,4 +15,4 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutMix();
     }
-} 
+}
