@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/esign/laravel-nova-testing.svg?style=flat-square)](https://packagist.org/packages/esign/laravel-nova-testing)
 [![Total Downloads](https://img.shields.io/packagist/dt/esign/laravel-nova-testing.svg?style=flat-square)](https://packagist.org/packages/esign/laravel-nova-testing)
-![GitHub Actions](https://github.com/esign/laravel-nova-testing/actions/workflows/main.yml/badge.svg)
+![GitHub Actions](https://github.com/esign/laravel-nova-testing/actions/workflows/run-tests.yml/badge.svg)
 
 A toolkit for testing [Laravel Nova](https://nova.laravel.com/) routes and resources. This package provides convenient testing utilities to interact with Nova endpoints in your feature and integration tests.
 
