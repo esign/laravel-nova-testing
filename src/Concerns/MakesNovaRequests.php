@@ -8,6 +8,7 @@ use Laravel\Nova\Resource as NovaResource;
 trait MakesNovaRequests
 {
     use MakesNovaActionRequests;
+    use MakesNovaFieldRequests;
     use MakesNovaResourceRequests;
     use MakesNovaPageRequests;
 

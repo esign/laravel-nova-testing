@@ -12,7 +12,7 @@ use Workbench\App\Models\User;
 use Workbench\App\Nova\Resources\Role as RoleResource;
 use Workbench\App\Nova\Resources\User as UserResource;
 
-class MakesNovaFieldRequests extends TestCase
+class MakesNovaFieldRequestsTest extends TestCase
 {
     use LazilyRefreshDatabase;
     use MakesNovaRequests;
