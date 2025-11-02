@@ -51,4 +51,24 @@ trait MakesNovaFieldRequests
 
         return $this->getJson("{$uri}?{$queryString}");
     }
+
+    public function patchNovaResourceUpdateFields(
+        string $resourceClass,
+        mixed $resourceId,
+        string $field,
+        string $component,
+        array $data
+    ): TestResponse {
+        $this->guardAgainstInvalidNovaResourceClass($resourceClass);
+
+        $uri = "/nova-api/{$resourceClass::uriKey()}/{$resourceId}/update-fields";
+        $queryString = Arr::query([
+            'editing' => 'true',
+            'editMode' => 'update',
+            'field' => $field,
+            'component' => $component,
+        ]);
+
+        return $this->patchJson("{$uri}?{$queryString}", $data);
+    }
 }

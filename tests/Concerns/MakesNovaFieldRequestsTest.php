@@ -88,4 +88,30 @@ class MakesNovaFieldRequestsTest extends TestCase
         $this->assertInstanceOf(TestResponse::class, $response);
         $response->assertStatus(200);
     }
+
+    #[Test]
+    public function it_can_patch_nova_resource_update_fields(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+
+        // Act
+        $response = $this->actingAs($user)->patchNovaResourceUpdateFields(
+            resourceClass: UserResource::class,
+            resourceId: $user->getKey(),
+            field: 'note',
+            component: 'text.text-field.note',
+            data: [
+                'has_note' => true,
+                'note' => '',
+            ]
+        );
+
+        // Assert
+        $this->assertInstanceOf(TestResponse::class, $response);
+        $response->assertStatus(200);
+        $this->assertEquals('note', $response->json('attribute'));
+        $this->assertTrue($response->json('visible'));
+        $this->assertTrue($response->json('dependsOn.has_note'));
+    }
 }

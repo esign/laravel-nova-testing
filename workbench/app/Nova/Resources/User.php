@@ -3,6 +3,8 @@
 namespace Workbench\App\Nova\Resources;
 
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
@@ -42,6 +44,17 @@ class User extends Resource
 
             Password::make('Password')
                 ->onlyOnForms(),
+
+            Boolean::make('Has note', 'has_note'),
+
+            Text::make('Note', 'note')
+                ->dependsOn(
+                    ['has_note'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        $formData->boolean('has_note') ? $field->show() : $field->hide();
+                    }
+                ),
+
 
             BelongsToMany::make('Roles', 'roles', Role::class),
         ];
