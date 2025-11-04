@@ -76,6 +76,11 @@ class ExampleTest extends TestCase
 - `getNovaResourceReplicatePage($resourceClass, $resourceId)`
 - `getNovaResourceLensPage($resourceClass, $lens)`
 
+#### Impersonation Requests
+
+- `startNovaImpersonation($resourceClass, $resourceId)`
+- `stopNovaImpersonation()`
+
 ## Testing
 
 ```bash
