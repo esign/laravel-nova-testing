@@ -55,7 +55,7 @@ class ExampleTest extends TestCase
 
 #### Field Requests
 
-- `getNovaResourceCreationFields($resourceClass)`
+- `getNovaResourceCreationFields($resourceClass, array $query = [])`
 - `getNovaResourceUpdateFields($resourceClass, $resourceId)`
 - `getNovaResourcePivotCreationFields($resourceClass, $resourceId, $relatedResourceClass, $relationshipName)`
 - `getNovaResourcePivotUpdateFields($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName)`
