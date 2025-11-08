@@ -7,11 +7,11 @@ use Illuminate\Testing\TestResponse;
 
 trait MakesNovaFieldRequests
 {
-    public function getNovaResourceCreationFields(string $resourceClass): TestResponse
+    public function getNovaResourceCreationFields(string $resourceClass, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/creation-fields");
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/creation-fields?" . Arr::query($query));
     }
 
     public function getNovaResourceUpdateFields(string $resourceClass, mixed $resourceId): TestResponse

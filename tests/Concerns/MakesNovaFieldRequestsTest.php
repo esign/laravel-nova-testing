@@ -32,6 +32,24 @@ class MakesNovaFieldRequestsTest extends TestCase
     }
 
     #[Test]
+    public function it_can_get_nova_resource_creation_fields_with_query(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+
+        // Act
+        $response = $this->actingAs($user)->getNovaResourceCreationFields(
+            resourceClass: UserResource::class,
+            query: ['foo' => 'bar']
+        );
+
+        // Assert
+        $this->assertInstanceOf(TestResponse::class, $response);
+        $response->assertStatus(200);
+        $this->assertStringContainsString('?foo=bar', $response->baseRequest->getUri());
+    }
+
+    #[Test]
     public function it_can_get_nova_resource_update_fields(): void
     {
         // Arrange
