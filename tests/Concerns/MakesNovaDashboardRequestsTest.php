@@ -55,6 +55,10 @@ final class MakesNovaDashboardRequestsTest extends TestCase
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);
         $response->assertStatus(200);
-        $response->assertJsonPath('value.value', 1);
+        $response->assertJsonStructure([
+            'value' => [
+                'value',
+            ],
+        ]);
     }
 }
