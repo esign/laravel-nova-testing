@@ -12,6 +12,7 @@ trait MakesNovaRequests
     use MakesNovaResourceRequests;
     use MakesNovaPageRequests;
     use MakesNovaImpersonationRequests;
+    use MakesNovaDashboardRequests;
 
     protected function guardAgainstInvalidNovaResourceClass(string $resourceClass): void
     {
