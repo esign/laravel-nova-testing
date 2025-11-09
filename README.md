@@ -65,6 +65,12 @@ class ExampleTest extends TestCase
 - `getNovaResourceActions($resourceClass)`
 - `runNovaResourceAction($resourceClass, $action, array $data = [])`
 
+#### Dashboard Requests
+
+- `getNovaDashboard($dashboard)`
+- `getNovaDashboardCards($dashboard)`
+- `getNovaDashboardMetric($dashboard, $metric, array $query = [])`
+
 #### Page Requests
 
 - `getNovaHomePage()`

@@ -3,27 +3,18 @@
 namespace Workbench\App\Nova\Dashboards;
 
 use Laravel\Nova\Dashboard;
+use Workbench\App\Nova\Metrics\NewUsers;
 
 class MyDashboard extends Dashboard
 {
-    /**
-     * Get the cards for the dashboard.
-     *
-     * @return array
-     */
-    public function cards()
+    public function cards(): array
     {
         return [
-            //
+            NewUsers::make(),
         ];
     }
 
-    /**
-     * Get the URI key for the dashboard.
-     *
-     * @return string
-     */
-    public function uriKey()
+    public function uriKey(): string
     {
         return 'my-dashboard';
     }
