@@ -21,7 +21,7 @@ final class MakesNovaDashboardRequestsTest extends TestCase
         $user = User::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->getNovaDashboard('my-dashboard');
+        $response = $this->actingAs($user)->getNovaDashboard('main');
 
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);
@@ -35,7 +35,7 @@ final class MakesNovaDashboardRequestsTest extends TestCase
         $user = User::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->getNovaDashboardCards('my-dashboard');
+        $response = $this->actingAs($user)->getNovaDashboardCards('main');
 
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);
@@ -50,7 +50,7 @@ final class MakesNovaDashboardRequestsTest extends TestCase
         $user = User::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->getNovaDashboardMetric('my-dashboard', 'new-users');
+        $response = $this->actingAs($user)->getNovaDashboardMetric('main', 'new-users');
 
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);

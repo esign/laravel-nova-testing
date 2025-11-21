@@ -42,7 +42,7 @@ class ExampleTest extends TestCase
 
 #### Resource Requests
 
-- `getNovaResourceIndex($resourceClass)`
+- `getNovaResourceIndex($resourceClass, array $filters = [])`
 - `getNovaResourceDetail($resourceClass, $resourceId)`
 - `createNovaResource($resourceClass, array $data)`
 - `updateNovaResource($resourceClass, $resourceId, array $data)`

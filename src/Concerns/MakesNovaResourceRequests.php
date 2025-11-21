@@ -7,11 +7,19 @@ use Illuminate\Testing\TestResponse;
 
 trait MakesNovaResourceRequests
 {
-    public function getNovaResourceIndex(string $resourceClass): TestResponse
+    public function getNovaResourceIndex(string $resourceClass, array $filters = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}");
+        $query = [];
+
+        if (! empty($filters)) {
+            $query['filters'] = base64_encode(json_encode($filters));
+        }
+
+        $queryString = Arr::query($query);
+
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}?{$queryString}");
     }
 
     public function getNovaResourceDetail(string $resourceClass, mixed $resourceId): TestResponse

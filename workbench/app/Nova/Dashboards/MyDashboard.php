@@ -16,6 +16,6 @@ class MyDashboard extends Dashboard
 
     public function uriKey(): string
     {
-        return 'my-dashboard';
+        return 'main';
     }
 }
