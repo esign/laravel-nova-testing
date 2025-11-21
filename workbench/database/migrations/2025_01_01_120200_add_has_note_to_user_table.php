@@ -10,13 +10,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('has_note')->default(false);
-        });
-    }
-
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('has_note');
+            $table->string('note')->nullable();
         });
     }
 };

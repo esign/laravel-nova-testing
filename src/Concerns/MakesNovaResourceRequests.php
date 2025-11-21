@@ -17,7 +17,7 @@ trait MakesNovaResourceRequests
             $query['filters'] = base64_encode(json_encode($filters));
         }
 
-        $queryString = http_build_query($query);
+        $queryString = Arr::query($query);
 
         return $this->getJson("/nova-api/{$resourceClass::uriKey()}?{$queryString}");
     }
