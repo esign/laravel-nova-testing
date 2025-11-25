@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 use Workbench\App\Nova\Actions\MyAction;
+use Workbench\App\Nova\Filters\UserHasNoteFilter;
 use Workbench\App\Nova\Lenses\MyLens;
 
 class User extends Resource
@@ -57,6 +58,13 @@ class User extends Resource
 
 
             BelongsToMany::make('Roles', 'roles', Role::class),
+        ];
+    }
+
+    public function filters(NovaRequest $request)
+    {
+        return [
+            UserHasNoteFilter::make(),
         ];
     }
 

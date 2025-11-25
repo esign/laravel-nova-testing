@@ -36,7 +36,7 @@ final class MakesNovaPageRequestsTest extends TestCase
         $user = User::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->getNovaDashboardPage(dashboard: 'my-dashboard');
+        $response = $this->actingAs($user)->getNovaDashboardPage(dashboard: 'main');
 
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);

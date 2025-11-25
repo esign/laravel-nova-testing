@@ -7,8 +7,10 @@ use Esign\NovaTesting\Tests\TestCase;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use Workbench\App\Models\Role;
 use Workbench\App\Models\User;
+use Workbench\App\Nova\Filters\UserHasNoteFilter;
 use Workbench\App\Nova\Resources\Role as RoleResource;
 use Workbench\App\Nova\Resources\User as UserResource;
 
@@ -29,6 +31,38 @@ class MakesNovaResourceRequestsTest extends TestCase
         // Assert
         $this->assertInstanceOf(TestResponse::class, $response);
         $response->assertStatus(200);
+    }
+
+    #[Test]
+    #[TestWith([true])]
+    #[TestWith([false])]
+    public function it_can_filter_users_by_note_status(bool $hasNote): void
+    {
+        // Arrange
+        $userWithNote = User::factory()->create(['has_note' => true]);
+        $userWithoutNote = User::factory()->create(['has_note' => false]);
+
+        // Act
+        $response = $this
+            ->actingAs($userWithNote)
+            ->getNovaResourceIndex(
+                resourceClass: UserResource::class,
+                filters: [
+                    [UserHasNoteFilter::class => ['has_note' => $hasNote]],
+                ]
+            );
+
+        // Assert
+        $response->assertStatus(200);
+        $resourceIds = $response->json('resources.*.id.value') ?? [];
+
+        if ($hasNote) {
+            $this->assertContains($userWithNote->getKey(), $resourceIds);
+            $this->assertNotContains($userWithoutNote->getKey(), $resourceIds);
+        } else {
+            $this->assertContains($userWithoutNote->getKey(), $resourceIds);
+            $this->assertNotContains($userWithNote->getKey(), $resourceIds);
+        }
     }
 
     #[Test]
