@@ -7,7 +7,7 @@ use Illuminate\Testing\TestResponse;
 
 trait MakesNovaResourceRequests
 {
-    public function getNovaResourceIndex(string $resourceClass, array $filters = [], array $query = []): TestResponse
+    public function getNovaResourceIndex(string $resourceClass, array $query = [], array $filters = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
