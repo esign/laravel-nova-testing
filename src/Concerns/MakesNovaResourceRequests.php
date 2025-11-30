@@ -7,61 +7,61 @@ use Illuminate\Testing\TestResponse;
 
 trait MakesNovaResourceRequests
 {
-    public function getNovaResourceIndex(string $resourceClass, array $filters = []): TestResponse
+    public function getNovaResourceIndex(string $resourceClass, array $filters = [], array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        $query = [];
+        $queryParams = $query;
 
         if (! empty($filters)) {
-            $query['filters'] = base64_encode(json_encode($filters));
+            $queryParams['filters'] = base64_encode(json_encode($filters));
         }
 
-        $queryString = Arr::query($query);
+        $queryString = Arr::query($queryParams);
 
         return $this->getJson("/nova-api/{$resourceClass::uriKey()}?{$queryString}");
     }
 
-    public function getNovaResourceDetail(string $resourceClass, mixed $resourceId): TestResponse
+    public function getNovaResourceDetail(string $resourceClass, mixed $resourceId, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}");
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}?" . Arr::query($query));
     }
 
-    public function createNovaResource(string $resourceClass, array $data): TestResponse
+    public function createNovaResource(string $resourceClass, array $data, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->postJson("/nova-api/{$resourceClass::uriKey()}", $data);
+        return $this->postJson("/nova-api/{$resourceClass::uriKey()}?" . Arr::query($query), $data);
     }
 
-    public function updateNovaResource(string $resourceClass, mixed $resourceId, array $data): TestResponse
+    public function updateNovaResource(string $resourceClass, mixed $resourceId, array $data, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}", $data);
+        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}?" . Arr::query($query), $data);
     }
 
-    public function deleteNovaResource(string $resourceClass, array $resourceIds): TestResponse
+    public function deleteNovaResource(string $resourceClass, array $resourceIds, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->deleteJson("/nova-api/{$resourceClass::uriKey()}?" . Arr::query(['resources' => $resourceIds]));
+        return $this->deleteJson("/nova-api/{$resourceClass::uriKey()}?" . Arr::query(['resources' => $resourceIds, ...$query]));
     }
 
-    public function forceDeleteNovaResource(string $resourceClass, array $resourceIds): TestResponse
+    public function forceDeleteNovaResource(string $resourceClass, array $resourceIds, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->deleteJson("/nova-api/{$resourceClass::uriKey()}/force?" . Arr::query(['resources' => $resourceIds]));
+        return $this->deleteJson("/nova-api/{$resourceClass::uriKey()}/force?" . Arr::query(['resources' => $resourceIds, ...$query]));
     }
 
-    public function restoreNovaResource(string $resourceClass, array $resourceIds): TestResponse
+    public function restoreNovaResource(string $resourceClass, array $resourceIds, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/restore?" . Arr::query(['resources' => $resourceIds]));
+        return $this->putJson("/nova-api/{$resourceClass::uriKey()}/restore?" . Arr::query(['resources' => $resourceIds, ...$query]));
     }
 
     public function attachNovaResource(
@@ -70,13 +70,14 @@ trait MakesNovaResourceRequests
         string $relatedResourceClass,
         mixed $relatedResourceId,
         string $relationshipName,
-        array $data = []
+        array $data = [],
+        array $query = []
     ): TestResponse {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
         $this->guardAgainstInvalidNovaResourceClass($relatedResourceClass);
 
         $uri = "/nova-api/{$resourceClass::uriKey()}/{$resourceId}/attach/{$relatedResourceClass::uriKey()}";
-        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'attach']);
+        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'attach', ...$query]);
 
         return $this->postJson("{$uri}?{$queryString}", [
             'viaRelationship' => $relationshipName,
@@ -85,17 +86,17 @@ trait MakesNovaResourceRequests
         ]);
     }
 
-    public function getNovaResourceCount(string $resourceClass): TestResponse
+    public function getNovaResourceCount(string $resourceClass, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/count");
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/count?" . Arr::query($query));
     }
 
-    public function getNovaResourceFilters(string $resourceClass): TestResponse
+    public function getNovaResourceFilters(string $resourceClass, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/filters");
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/filters?" . Arr::query($query));
     }
 }
