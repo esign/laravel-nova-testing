@@ -42,50 +42,51 @@ class ExampleTest extends TestCase
 
 #### Resource Requests
 
-- `getNovaResourceIndex($resourceClass, array $filters = [])`
-- `getNovaResourceDetail($resourceClass, $resourceId)`
-- `createNovaResource($resourceClass, array $data)`
-- `updateNovaResource($resourceClass, $resourceId, array $data)`
-- `deleteNovaResource($resourceClass, array $resourceIds)`
-- `forceDeleteNovaResource($resourceClass, array $resourceIds)`
-- `restoreNovaResource($resourceClass, array $resourceIds)`
-- `attachNovaResource($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName, array $data = [])`
-- `getNovaResourceCount($resourceClass)`
-- `getNovaResourceFilters($resourceClass)`
+- `getNovaResourceIndex($resourceClass, array $query = [], array $filters = [])`
+- `getNovaResourceDetail($resourceClass, $resourceId, array $query = [])`
+- `createNovaResource($resourceClass, array $data, array $query = [])`
+- `updateNovaResource($resourceClass, $resourceId, array $data, array $query = [])`
+- `deleteNovaResource($resourceClass, array $resourceIds, array $query = [])`
+- `forceDeleteNovaResource($resourceClass, array $resourceIds, array $query = [])`
+- `restoreNovaResource($resourceClass, array $resourceIds, array $query = [])`
+- `attachNovaResource($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName, array $data = [], array $query = [])`
+- `getNovaResourceCount($resourceClass, array $query = [])`
+- `getNovaResourceFilters($resourceClass, array $query = [])`
 
 #### Field Requests
 
 - `getNovaResourceCreationFields($resourceClass, array $query = [])`
-- `getNovaResourceUpdateFields($resourceClass, $resourceId)`
-- `getNovaResourcePivotCreationFields($resourceClass, $resourceId, $relatedResourceClass, $relationshipName)`
-- `getNovaResourcePivotUpdateFields($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName)`
+- `getNovaResourceUpdateFields($resourceClass, $resourceId, array $query = [])`
+- `getNovaResourcePivotCreationFields($resourceClass, $resourceId, $relatedResourceClass, $relationshipName, array $query = [])`
+- `getNovaResourcePivotUpdateFields($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName, array $query = [])`
+- `patchNovaResourceUpdateFields($resourceClass, $resourceId, $field, $component, array $data, array $query = [])`
 
 #### Action Requests
 
-- `getNovaResourceActions($resourceClass)`
-- `runNovaResourceAction($resourceClass, $action, array $data = [])`
+- `getNovaResourceActions($resourceClass, array $query = [])`
+- `runNovaResourceAction($resourceClass, $action, array $data = [], array $query = [])`
 
 #### Dashboard Requests
 
-- `getNovaDashboard($dashboard)`
-- `getNovaDashboardCards($dashboard)`
+- `getNovaDashboard($dashboard, array $query = [])`
+- `getNovaDashboardCards($dashboard, array $query = [])`
 - `getNovaDashboardMetric($dashboard, $metric, array $query = [])`
 
 #### Page Requests
 
-- `getNovaHomePage()`
-- `getNovaDashboardPage($dashboard)`
-- `getNovaResourceIndexPage($resourceClass)`
-- `getNovaResourceDetailPage($resourceClass, $resourceId)`
-- `getNovaResourceCreatePage($resourceClass)`
-- `getNovaResourceEditPage($resourceClass, $resourceId)`
-- `getNovaResourceReplicatePage($resourceClass, $resourceId)`
-- `getNovaResourceLensPage($resourceClass, $lens)`
+- `getNovaHomePage(array $query = [])`
+- `getNovaDashboardPage($dashboard, array $query = [])`
+- `getNovaResourceIndexPage($resourceClass, array $query = [])`
+- `getNovaResourceDetailPage($resourceClass, $resourceId, array $query = [])`
+- `getNovaResourceCreatePage($resourceClass, array $query = [])`
+- `getNovaResourceEditPage($resourceClass, $resourceId, array $query = [])`
+- `getNovaResourceReplicatePage($resourceClass, $resourceId, array $query = [])`
+- `getNovaResourceLensPage($resourceClass, $lens, array $query = [])`
 
 #### Impersonation Requests
 
-- `startNovaImpersonation($resourceClass, $resourceId)`
-- `stopNovaImpersonation()`
+- `startNovaImpersonation($resourceClass, $resourceId, array $query = [])`
+- `stopNovaImpersonation(array $query = [])`
 
 ## Testing
 

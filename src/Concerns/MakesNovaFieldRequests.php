@@ -14,24 +14,25 @@ trait MakesNovaFieldRequests
         return $this->getJson("/nova-api/{$resourceClass::uriKey()}/creation-fields?" . Arr::query($query));
     }
 
-    public function getNovaResourceUpdateFields(string $resourceClass, mixed $resourceId): TestResponse
+    public function getNovaResourceUpdateFields(string $resourceClass, mixed $resourceId, array $query = []): TestResponse
     {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
-        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}/update-fields");
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/{$resourceId}/update-fields?" . Arr::query($query));
     }
 
     public function getNovaResourcePivotCreationFields(
         string $resourceClass,
         mixed $resourceId,
         string $relatedResourceClass,
-        string $relationshipName
+        string $relationshipName,
+        array $query = []
     ): TestResponse {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
         $this->guardAgainstInvalidNovaResourceClass($relatedResourceClass);
 
         $uri = "/nova-api/{$resourceClass::uriKey()}/{$resourceId}/creation-pivot-fields/{$relatedResourceClass::uriKey()}";
-        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'attach', 'viaRelationship' => $relationshipName]);
+        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'attach', 'viaRelationship' => $relationshipName, ...$query]);
 
         return $this->getJson("{$uri}?{$queryString}");
     }
@@ -41,13 +42,14 @@ trait MakesNovaFieldRequests
         mixed $resourceId,
         string $relatedResourceClass,
         mixed $relatedResourceId,
-        string $relationshipName
+        string $relationshipName,
+        array $query = []
     ): TestResponse {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
         $this->guardAgainstInvalidNovaResourceClass($relatedResourceClass);
 
         $uri = "/nova-api/{$resourceClass::uriKey()}/{$resourceId}/update-pivot-fields/{$relatedResourceClass::uriKey()}/{$relatedResourceId}";
-        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'update-attached', 'viaRelationship' => $relationshipName]);
+        $queryString = Arr::query(['editing' => 'true', 'editMode' => 'update-attached', 'viaRelationship' => $relationshipName, ...$query]);
 
         return $this->getJson("{$uri}?{$queryString}");
     }
@@ -57,7 +59,8 @@ trait MakesNovaFieldRequests
         mixed $resourceId,
         string $field,
         string $component,
-        array $data
+        array $data,
+        array $query = []
     ): TestResponse {
         $this->guardAgainstInvalidNovaResourceClass($resourceClass);
 
@@ -67,6 +70,7 @@ trait MakesNovaFieldRequests
             'editMode' => 'update',
             'field' => $field,
             'component' => $component,
+            ...$query,
         ]);
 
         return $this->patchJson("{$uri}?{$queryString}", $data);
