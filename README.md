@@ -64,8 +64,7 @@ class ExampleTest extends TestCase
 
 #### Associatable Requests
 
-- `getNovaAssociatable($resourceClass, $field, $resourceId, $component, $search = '', array $query = [])`
-
+- `getNovaAssociatableResources($resourceClass, $field, $resourceId, $component, $search = '', array $query = [])`
 #### Action Requests
 
 - `getNovaResourceActions($resourceClass, array $query = [])`
