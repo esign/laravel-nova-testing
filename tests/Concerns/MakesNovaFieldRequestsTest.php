@@ -132,4 +132,22 @@ class MakesNovaFieldRequestsTest extends TestCase
         $this->assertTrue($response->json('visible'));
         $this->assertTrue($response->json('dependsOn.has_note'));
     }
+
+    #[Test]
+    public function it_can_delete_nova_field_attachment(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+
+        // Act
+        $response = $this->actingAs($user)->deleteNovaResourceField(
+            resourceClass: UserResource::class,
+            resourceId: $user->getKey(),
+            field: 'avatar'
+        );
+
+        // Assert
+        $this->assertInstanceOf(TestResponse::class, $response);
+        $response->assertStatus(200);
+    }
 }

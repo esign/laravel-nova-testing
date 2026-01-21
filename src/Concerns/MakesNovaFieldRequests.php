@@ -75,4 +75,14 @@ trait MakesNovaFieldRequests
 
         return $this->patchJson("{$uri}?{$queryString}", $data);
     }
+
+    public function deleteNovaResourceField(string $resourceClass, mixed $resourceId, string $field, array $query = []): TestResponse
+    {
+        $this->guardAgainstInvalidNovaResourceClass($resourceClass);
+
+        $uri = "/nova-api/{$resourceClass::uriKey()}/{$resourceId}/field/{$field}";
+        $queryString = Arr::query($query);
+
+        return $this->deleteJson($queryString ? "{$uri}?{$queryString}" : $uri);
+    }
 }
