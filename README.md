@@ -62,6 +62,9 @@ class ExampleTest extends TestCase
 - `patchNovaResourceUpdateFields($resourceClass, $resourceId, $field, $component, array $data, array $query = [])`
 - `deleteNovaResourceField($resourceClass, $resourceId, $field, array $query = [])`
 
+#### Associatable Requests
+
+- `getNovaAssociatableResources($resourceClass, $field, $resourceId, $component, $search = '', array $query = [])`
 #### Action Requests
 
 - `getNovaResourceActions($resourceClass, array $query = [])`

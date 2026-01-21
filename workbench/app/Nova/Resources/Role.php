@@ -21,4 +21,16 @@ class Role extends Resource
                 ->rules('required', 'max:255'),
         ];
     }
+
+    public function title(): string
+    {
+        return $this->name;
+    }
+
+    public static function searchableColumns(): array
+    {
+        return [
+            'name',
+        ];
+    }
 }
