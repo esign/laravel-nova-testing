@@ -224,4 +224,28 @@ class MakesNovaResourceRequestsTest extends TestCase
         $this->assertInstanceOf(TestResponse::class, $response);
         $response->assertStatus(200);
     }
+
+    #[Test]
+    public function it_can_search_for_associatable_resources(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        Role::factory()->create(['name' => 'Administrator']);
+        Role::factory()->create(['name' => 'Guest']);
+
+        // Act - search for "Ad" (partial match for Administrator)
+        $response = $this->actingAs($user)->getNovaAssociatableResources(
+            resourceClass: UserResource::class,
+            field: 'role',
+            resourceId: $user->getKey(),
+            component: 'belongsto.belongs-to-field.role',
+            search: 'Ad'
+        );
+
+        // Assert
+        $this->assertInstanceOf(TestResponse::class, $response);
+        $response->assertStatus(200);
+        $this->assertContains('Administrator', $response->json('resources.*.display'));
+        $this->assertNotContains('Guest', $response->json('resources.*.display'));
+    }
 }

@@ -99,4 +99,26 @@ trait MakesNovaResourceRequests
 
         return $this->getJson("/nova-api/{$resourceClass::uriKey()}/filters?" . Arr::query($query));
     }
+
+    public function getNovaAssociatableResources(
+        string $resourceClass,
+        string $field,
+        mixed $resourceId,
+        string $component,
+        string $search = '',
+        array $query = []
+    ): TestResponse {
+        $this->guardAgainstInvalidNovaResourceClass($resourceClass);
+
+        $queryParams = [
+            'resourceId' => $resourceId,
+            'component' => $component,
+            'search' => $search,
+            ...$query,
+        ];
+
+        $queryString = Arr::query($queryParams);
+
+        return $this->getJson("/nova-api/{$resourceClass::uriKey()}/associatable/{$field}?{$queryString}");
+    }
 }
