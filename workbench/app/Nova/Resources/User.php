@@ -2,6 +2,7 @@
 
 namespace Workbench\App\Nova\Resources;
 
+use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FormData;
@@ -32,6 +33,8 @@ class User extends Resource
     {
         return [
             ID::make()->sortable(),
+
+            Avatar::make('Avatar')->disk('public'),
 
             Text::make('Name')
                 ->sortable()

@@ -60,6 +60,7 @@ class ExampleTest extends TestCase
 - `getNovaResourcePivotCreationFields($resourceClass, $resourceId, $relatedResourceClass, $relationshipName, array $query = [])`
 - `getNovaResourcePivotUpdateFields($resourceClass, $resourceId, $relatedResourceClass, $relatedResourceId, $relationshipName, array $query = [])`
 - `patchNovaResourceUpdateFields($resourceClass, $resourceId, $field, $component, array $data, array $query = [])`
+- `deleteNovaResourceField($resourceClass, $resourceId, $field, array $query = [])`
 
 #### Action Requests
 
